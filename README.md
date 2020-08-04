@@ -1,1 +1,1 @@
-https://daniel-lesner.github.io/maze-solver/dist/index.html
+https://daniel-lesner.github.io/RandomMazeSolver/dist/index.html
