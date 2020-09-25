@@ -1,4 +1,4 @@
-import { checkIfArrayIsIn2DArray, checkIfArrayIsIn3DArray } from "./utils.js"
+import { range, checkIfArrayIsIn2DArray, checkIfArrayIsIn3DArray } from "./utils.js"
 
 export class FindMazeSolution {
     constructor (matrix, playerPosition) {
@@ -26,7 +26,7 @@ export class FindMazeSolution {
 
     solveMaze() {
 
-        while (!(this.isPlayerTrapped || this.foundSolution)){
+        while (!(this.isPlayerTrapped || this.foundSolution)) {
             /* 
             This algorithm will start from the player's position and look at each of its NWSE 
             neighbours and check if the cell is free, and then checks the neighbour's neighbours 
@@ -39,7 +39,7 @@ export class FindMazeSolution {
             */
             this.length = this.pathMatrix.length
 
-            for (this.i = 0; this.i < this.length; this.i++){
+            for (this.i of range(0, this.length)) {
                 this.xCoord = this.pathMatrix[this.i][this.pathMatrix[this.i].length - 1][0]
                 this.yCoord = this.pathMatrix[this.i][this.pathMatrix[this.i].length - 1][1]
 
@@ -48,22 +48,22 @@ export class FindMazeSolution {
                     break
                 }
                 
-                if (this.xCoord + 1 < this.matrix.length){
+                if (this.xCoord + 1 < this.matrix.length) {
                     this.testCoordonate = [this.xCoord + 1, this.yCoord]
                     this._addFreeNeigbhourIfYouNeverPassedInIt()
                 }
 
-                if (this.yCoord + 1 < this.matrix[0].length){
+                if (this.yCoord + 1 < this.matrix[0].length) {
                     this.testCoordonate = [this.xCoord, this.yCoord + 1]
                     this._addFreeNeigbhourIfYouNeverPassedInIt()
                 }
 
-                if (this.xCoord - 1 > -1){
+                if (this.xCoord - 1 > -1) {
                     this.testCoordonate = [this.xCoord - 1, this.yCoord]
                     this._addFreeNeigbhourIfYouNeverPassedInIt()
                 }
 
-                if (this.yCoord - 1 > -1){
+                if (this.yCoord - 1 > -1) {
                     this.testCoordonate = [this.xCoord, this.yCoord - 1]
                     this._addFreeNeigbhourIfYouNeverPassedInIt()
                 }
@@ -74,8 +74,8 @@ export class FindMazeSolution {
                      break
                 }
 
-                for (let j=0; j < this.pathMatrix.length; j++){
-                    if (checkIfArrayIsIn2DArray(this.escapePosition,this.pathMatrix[this.i]) == true){
+                for (let j of range(0, this.pathMatrix.length)) {
+                    if (checkIfArrayIsIn2DArray(this.escapePosition,this.pathMatrix[this.i]) == true) {
                         this.foundSolution = true
                         this.solution = this.pathMatrix[this.i]
                         break
@@ -87,15 +87,15 @@ export class FindMazeSolution {
         }
     }
 
-    addSolutionToCanvas(){
+    addSolutionToCanvas() {
 
-        if (this.isPlayerTrapped){
-            document.getElementById("message").style.visibility = "visible";
+        if (this.isPlayerTrapped) {
+            document.getElementById("main__buttons__message").style.display = "flex";
         }
 
-        if (this.foundSolution){
+        if (this.foundSolution) {
 
-            for (let i = 1; i < this.solution.length; i++){
+            for (let i of range(1, this.solution.length)) {
                 this.matrix[this.solution[i][0]][this.solution[i][1]] = "solution"
             }
         }
@@ -103,22 +103,22 @@ export class FindMazeSolution {
 
     _addFreeNeigbhourIfYouNeverPassedInIt() {
 
-        if (this.matrix[this.testCoordonate[0]][this.testCoordonate[1]] == "free" && 
-        checkIfArrayIsIn3DArray(this.testCoordonate,this.pathMatrix) == false )
+        if (this.matrix[this.testCoordonate[0]][this.testCoordonate[1]] == "free" 
+        && !checkIfArrayIsIn3DArray(this.testCoordonate, this.pathMatrix))
         {
             this.pathMatrix = [... this.pathMatrix, [... this.pathMatrix[this.i], this.testCoordonate]]
         }
     }
 
     _checkIfPlayerIsTrapped() {
-        if (this.pathMatrix.length == 0){
+        if (this.pathMatrix.length == 0) {
             this.isPlayerTrapped = true
         }
     }
 
-    _removeUnusedPaths(){
+    _removeUnusedPaths() {
 
-        for (let g = 0; g < this.length; g++){
+        for (let g of range(0, this.length)) {
             this.pathMatrix.shift()
         }
     }

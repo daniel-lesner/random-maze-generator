@@ -1,13 +1,24 @@
-export let randomNumber = (startRange, endRange) => {
+export const randomNumber = (startRange, endRange) => {
     return Math.floor(Math.random() * Math.floor(1 + endRange - startRange) + startRange)
 }
 
-export let checkIfArrayIsIn3DArray = (Array, _3DArray) => {
-    let isEqual = false
+export const range = (startRange, endRange) => {
+    let i, result = [];
 
-    for (let i = 0; i < _3DArray.length; i++) {
+    for (i = startRange; i < endRange; i++) {
+        result.push(i);
+    }
+    return result;
+}
 
-        for (let j = 0; j< _3DArray[i].length; j++) {
+
+
+export const checkIfArrayIsIn3DArray = (Array, _3DArray) => {
+    let i,j, isEqual = false
+
+    for (i of range(0, _3DArray.length)) {
+
+        for (j of range(0, _3DArray[i].length)) {
 
             if (_3DArray[i][j].toString() == Array.toString()) {
                 isEqual = true
@@ -18,10 +29,11 @@ export let checkIfArrayIsIn3DArray = (Array, _3DArray) => {
     return isEqual
 }
 
-export let checkIfArrayIsIn2DArray = (Array, _2DArray) => {
-    let isEqual = false
+export const checkIfArrayIsIn2DArray = (Array, _2DArray) => {
+    let i, isEqual = false
+    // var foo = Array.from(Array(_2DArray.length).keys())
 
-    for (let i = 0; i < _2DArray.length; i++) {
+    for (i of range(0, _2DArray.length)) {
 
             if (_2DArray[i].toString() == Array.toString()) {
                 isEqual = true

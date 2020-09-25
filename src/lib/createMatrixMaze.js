@@ -1,4 +1,4 @@
-import { randomNumber } from "./utils.js"
+import { randomNumber, range } from "./utils.js"
 
 export class CreateMatrixMaze {
     /*
@@ -6,7 +6,7 @@ export class CreateMatrixMaze {
     generated and will output an matrix (2D Array) and randomly assign the position of the player,
     walls and paths of our maze
     */ 
-    constructor(rows, columns){
+    constructor(rows, columns) {
         this.rows = rows
         this.columns = columns
         this.totalNumberOfCells = this.rows * this.columns
@@ -18,21 +18,21 @@ export class CreateMatrixMaze {
 
         this.valueArray.push("player")
 
-        for (let i = 0; i < this.numberOfWalls; i++) {
+        for (let i of range(0, this.numberOfWalls)) {
             this.valueArray.push("wall");
         }
 
-        for (let i = 0; i < this.totalNumberOfCells - this.numberOfWalls - 1; i++) {
+        for (let i of range(0, this.totalNumberOfCells - this.numberOfWalls - 1)) {
             this.valueArray.push("free");
         }
     }
 
     createUnsolvedMatrix() {
 
-        for (let i = 0; i < this.rows; i++) {
+        for (let i of range(0, this.rows)) {
             this.matrix[i] = []
 
-            for (let j = 0; j < this.columns; j++) {
+            for (let j of range(0, this.columns)) {
 
                 if (j + 1 == this.columns && i + 1 == this.rows) {
                     this.matrix[i][j] = this.valueArray[0]
