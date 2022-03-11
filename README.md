@@ -1,4 +1,4 @@
-Random maze generator and solve made using JavaScript and PixiJS.
+App that generates a random maze, along with a solution for exit, if any, made using plain JavaScript and PixiJS.
 
 Bundled with WebPack, used OOP, self-made graphics and made my own implementation of the A* Search Algorithm.
 
